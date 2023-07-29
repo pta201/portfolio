@@ -4,8 +4,8 @@ interface Props {}
 export default function Signature({}: Props) {
   return (
     <motion.svg
-      width="1096"
-      height="518"
+      width="100%"
+      height="100%"
       viewBox="0 0 1096 518"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
