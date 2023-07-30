@@ -1,8 +1,14 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
+import { cn } from "../../../lib/utils";
 
-const AnimatedText = ({ text }: { text: string }) => {
+const AnimatedText = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}) => {
   const words = text.split(" ");
 
   // Variants for Container of words.
@@ -39,7 +45,7 @@ const AnimatedText = ({ text }: { text: string }) => {
 
   return (
     <motion.div
-      style={{ overflow: "hidden", display: "flex", fontSize: "2rem" }}
+      className={cn(" flex text-3xl", className)}
       variants={container}
       initial="hidden"
       animate="visible"
