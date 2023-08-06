@@ -8,10 +8,6 @@ module.exports = {
     "./src/**/*.{ts,tsx}",
   ],
   theme: {
-    colors: {
-      black: "#16161D",
-      white: "#FFFFFF",
-    },
     container: {
       center: true,
       padding: "2rem",
@@ -21,6 +17,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        black: "#16161D",
+        white: "#FFFFFF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -1,8 +1,8 @@
 "use client";
 
-import { siteConfig } from "../../../constants/config/site";
-import Icon from "../../Icon";
-import Nav from "../MainNav";
+import Icon from "@/components/Icon";
+import { siteConfig } from "@/constants/config/site";
+import Nav from "@/pages/Landing/layout/MainNav";
 
 export default function MainHeader() {
   return (

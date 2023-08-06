@@ -44,7 +44,7 @@ const AnimatedText = ({
   };
 
   return (
-    <motion.div
+    <motion.span
       className={cn(" flex text-3xl", className)}
       variants={container}
       initial="hidden"
@@ -59,7 +59,7 @@ const AnimatedText = ({
           {word}
         </motion.span>
       ))}
-    </motion.div>
+    </motion.span>
   );
 };
 
