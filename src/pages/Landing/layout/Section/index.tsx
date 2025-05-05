@@ -1,3 +1,4 @@
+import { TypographyH2 } from "@/components/ui/typography";
 import { ReactNode } from "react";
 
 interface SectionProps {
@@ -7,7 +8,7 @@ interface SectionProps {
 export default function Section({ children, title }: SectionProps) {
   return (
     <section>
-      <h2 className="text-2xl uppercase text-center mb-6">{title}</h2>
+      <TypographyH2 className="text-center mb-6">{title}</TypographyH2>
       {children}
     </section>
   );

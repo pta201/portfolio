@@ -1,3 +1,4 @@
+import { TypographyH3, TypographySmall } from "@/components/ui/typography";
 import { siteConfig } from "@/constants/config/site";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +16,12 @@ export default function Project() {
               index % 2 === 0 ? "md:order-1" : "md:order-2"
             }`}
           >
-            <h3 className="text-sky-400 font-bold text-xl">{item.title}</h3>
-            <p className="text-sm break-words">{item.description}</p>
+            <TypographyH3 className="font-bold text-xl">
+              {item.title}
+            </TypographyH3>
+            <TypographySmall className="break-words">
+              {item.description}
+            </TypographySmall>
           </div>
           <div
             className={`order-2 mx-auto ${

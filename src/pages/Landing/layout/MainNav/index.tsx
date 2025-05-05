@@ -14,7 +14,7 @@ export default function Nav() {
 
 interface NavItemProps {
   href?: string;
-  content: ReactNode | JSX.Element;
+  content: ReactNode;
   isActive?: boolean;
 }
 

@@ -16,8 +16,8 @@ export const siteConfig = {
     ],
     experiences: [
       {
-        title: "University",
-        time: "xx.8.2019 - xx.xx.xxxx",
+        title: "University of Transport and Communication",
+        time: "xx.8.2019 - xx.4.2024",
       },
       {
         title: "First internship",
@@ -28,26 +28,13 @@ export const siteConfig = {
         time: "02.02.2023 - 01.06.2023",
       },
       {
-        title: "Junior developer at FPT Software",
+        title: "Web developer at FPT Software",
         time: "02.06.2023 - now",
       },
     ],
     projects: [
       {
         title: "My portfolio",
-        description:
-          "My portfolio project to apply things like: Next.js, Framer-motion and Shadcn/ui!",
-        image: "/projects/portfolio.png",
-        repoLink: "https://github.com/pta201/portfolio",
-      },
-      {
-        title: "Final project of FPT Academy Internship",
-        description: "Final mock project using React.js w/ Node.js",
-        image: "/projects/portfolio.png",
-        repoLink: "https://github.com/",
-      },
-      {
-        title: "My realtor project",
         description:
           "My portfolio project to apply things like: Next.js, Framer-motion and Shadcn/ui!",
         image: "/projects/portfolio.png",

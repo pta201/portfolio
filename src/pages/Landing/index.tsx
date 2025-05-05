@@ -14,7 +14,7 @@ export default function Landing() {
         <MainHeader />
       </div>
       <main className="min-h-screen  text-white bg-black p-4">
-        <div className="flex flex-col gap-12 max-w-screen-lg mx-auto text-center">
+        <div className="flex flex-col gap-12 max-w-(--breakpoint-lg) mx-auto text-center">
           <section className="flex gap-4 flex-wrap-reverse justify-center">
             <div className="">
               <p className="text-xl">
