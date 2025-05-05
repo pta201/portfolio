@@ -1,62 +1,96 @@
+import AppImage from "@/components/custom/app-image";
+import { DraggableWindow } from "@/components/custom/dragable-window";
+import DroppableZone from "@/components/custom/dropable-zone";
 import AnimatedText from "@/components/ui/AnimatedText";
 import Signature from "@/components/ui/Signature";
+import { TypographyLarge, TypographyLead } from "@/components/ui/typography";
 import { siteConfig } from "@/constants/config/site";
 import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
 import MainHeader from "@/pages/Landing/layout/MainHeader";
-import Image from "next/image";
+import { DragDropProvider } from "@dnd-kit/react";
 import Project from "./components/Project";
-import Section from "./layout/Section";
 export default function Landing() {
+  // const [activeDraggable, setActiveDraggable] = useState(null);
   return (
     <>
       <div className="sticky top-0 opacity-95">
         <MainHeader />
       </div>
-      <main className="min-h-screen  text-white bg-black p-4">
-        <div className="flex flex-col gap-12 max-w-(--breakpoint-lg) mx-auto text-center">
-          <section className="flex gap-4 flex-wrap-reverse justify-center">
-            <div className="">
-              <p className="text-xl">
-                <AnimatedText
-                  text={`Hi! This is ${siteConfig.user.name}`}
-                  className="text-3xl"
-                />
-                {siteConfig.user.describe}
-              </p>
-            </div>
-            <div className="w-[200px]">
-              <Signature />
-            </div>
-          </section>
+      <DragDropProvider
+        onDragStart={(ev) => {
+          console.log("drag start", ev);
+        }}
+        onDragEnd={(ev) => {
+          console.log("drag end", ev);
+        }}
+      >
+        <DroppableZone id="droppable-zone">
+          <main className="min-h-screen text-foreground bg-primary/20  p-4">
+            <div className="flex flex-col gap-12 max-w-(--breakpoint-lg) mx-auto ">
+              <section className="flex gap-4 flex-wrap-reverse justify-between">
+                <div className="flex flex-col gap-4 flex-3/5">
+                  <TypographyLarge>
+                    <AnimatedText
+                      text={`Hello there! Welcome to my personal page`}
+                      className="text-3xl"
+                    />
+                  </TypographyLarge>
+                  <TypographyLead>{siteConfig.user.describe}</TypographyLead>
+                </div>
+                <div>
+                  <Signature />
+                </div>
+              </section>
 
-          <Section title="About">
-            <div className="flex items-center justify-center  md:justify-between md:gap-4 text-left flex-wrap-reverse">
-              <About />
+              <DraggableWindow
+                title="About"
+                content={
+                  <div className="flex items-center justify-center  md:justify-between md:gap-4 text-left flex-wrap-reverse">
+                    <About />
+                    <div className="rounded-full overflow-hidden">
+                      <AppImage
+                        src={siteConfig.user.github}
+                        width={"200"}
+                        height={"200"}
+                        alt="user-avatar"
+                      />
+                    </div>
+                  </div>
+                }
+                onDragStart={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                onDragEnd={function (): void {
+                  throw new Error("Function not implemented.");
+                }} // onClose={() => {}}
+              />
 
-              <div className="rounded-full overflow-hidden">
-                <Image
-                  src={siteConfig.user.github}
-                  width={"300"}
-                  height={"300"}
-                  alt="user-avatar"
-                />
-              </div>
-            </div>
-          </Section>
+              <DraggableWindow
+                title="Projects"
+                content={<Project />}
+                onDragStart={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                onDragEnd={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
 
-          <Section title="Projects">
-            <div className="flex flex-col">
-              <Project />
+              <DraggableWindow
+                title="Experience"
+                content={<Experience />}
+                onDragStart={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+                onDragEnd={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
             </div>
-          </Section>
-          <Section title="Experience">
-            <div className="flex flex-col justify-center">
-              <Experience />
-            </div>
-          </Section>
-        </div>
-      </main>
+          </main>
+        </DroppableZone>
+      </DragDropProvider>
     </>
   );
 }

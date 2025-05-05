@@ -1,4 +1,4 @@
-import { TypographyH2 } from "@/components/ui/typography";
+import { TypographyLarge } from "@/components/ui/typography";
 import { ReactNode } from "react";
 
 interface SectionProps {
@@ -7,8 +7,8 @@ interface SectionProps {
 }
 export default function Section({ children, title }: SectionProps) {
   return (
-    <section>
-      <TypographyH2 className="text-center mb-6">{title}</TypographyH2>
+    <section className="flex flex-col gap-8">
+      <TypographyLarge className="text-4xl ">{title}</TypographyLarge>
       {children}
     </section>
   );
