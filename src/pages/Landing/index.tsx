@@ -3,14 +3,15 @@ import { DraggableWindow } from "@/components/custom/dragable-window";
 import DroppableZone from "@/components/custom/dropable-zone";
 import AnimatedText from "@/components/ui/AnimatedText";
 import Signature from "@/components/ui/Signature";
-import { TypographyLarge, TypographyLead } from "@/components/ui/typography";
+import { TypographyLarge, TypographySmall } from "@/components/ui/typography";
 import { siteConfig } from "@/constants/config/site";
 import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
 import MainHeader from "@/pages/Landing/layout/MainHeader";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
-import { BriefcaseBusiness, Info, Pickaxe } from "lucide-react";
+import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
+import Contact from "./components/Contact";
 import Project from "./components/Project";
 
 const items = [
@@ -22,7 +23,7 @@ const items = [
         <About />
         <div className="rounded-full overflow-hidden">
           <AppImage
-            src={siteConfig.user.github}
+            src={siteConfig.user.avatar}
             width={"200"}
             height={"200"}
             alt="user-avatar"
@@ -44,11 +45,17 @@ const items = [
     content: <Experience />,
     icon: Pickaxe,
   },
+  {
+    id: "4",
+    title: "Contact",
+    content: <Contact />,
+    icon: Mail,
+  },
 ];
 const initWindows = items.map((item, index) => ({
   ...item,
-  x: Math.floor(Math.random() * index * 100),
-  y: Math.floor(Math.random() * index * 200),
+  x: Math.floor((0.5 + Math.random() * 0.5) * (index + 1) * 250),
+  y: Math.floor((0.5 + Math.random() * 0.5) * 250),
 }));
 
 export default function Landing() {
@@ -104,9 +111,14 @@ export default function Landing() {
                         className="text-4xl"
                       />
                     </TypographyLarge>
-                    <TypographyLead className="text-lg animate-fade-right animate-duration-[1500ms]">
-                      {siteConfig.user.describe}
-                    </TypographyLead>
+                    {siteConfig.user.describe.map((item) => (
+                      <TypographySmall
+                        key={item}
+                        className="text-lg animate-fade-right animate-duration-[1000ms]"
+                      >
+                        {item}
+                      </TypographySmall>
+                    ))}
                   </div>
                   <div>
                     <Signature />

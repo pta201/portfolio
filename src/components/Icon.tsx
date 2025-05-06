@@ -8,7 +8,7 @@ export default function Icon() {
 const Logo = () => {
   return (
     <Avatar className="w-10 h-10 rounded-full overflow-hidden">
-      <AvatarImage src={siteConfig.user.github} alt={siteConfig.user.name} />
+      <AvatarImage src={siteConfig.user.avatar} alt={siteConfig.user.name} />
       <AvatarFallback>
         <MdFace className="text-4xl" />
       </AvatarFallback>

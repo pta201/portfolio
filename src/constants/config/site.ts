@@ -1,9 +1,16 @@
 export const siteConfig = {
   user: {
     name: "Tien Anh",
-    github: "https://github.com/pta201.png?w=500&h=500",
+    avatar: "https://github.com/pta201.png?w=500&h=500",
+    github: "https://github.com/pta201",
     facebook: "https://www.facebook.com/pta208",
-    describe: `My name is Tien Anh. I'm a humble web developer in Vietnam. I love to learn new things and improve myself every day. I am a web developer with a passion for technology and tools. I love new challenges and opportunities to grow my skills.`,
+    email: "pta20801@gmail.com",
+    describe: [
+      "My name is Tien Anh 🐧.",
+      "I'm a web developer in 🇻🇳.",
+      "I love to learn new things and improve myself every day.",
+      "I love new challenges and opportunities to grow my skills.🐣",
+    ],
     about: [
       {
         title: "I love your feedback 😊.",
@@ -20,27 +27,31 @@ export const siteConfig = {
     ],
     experiences: [
       {
-        title: "University of Transport and Communication",
+        title: "University of Transport and Communication 👶",
         time: "xx.8.2019 - xx.4.2024",
       },
       {
-        title: "First internship",
+        title: "First internship 🎒",
         time: "8.6.2022 - 9.8.2022",
       },
       {
-        title: "Fresher at FPT Software",
+        title: "Fresher at FPT Software 🎒",
         time: "02.02.2023 - 01.06.2023",
       },
       {
-        title: "Web developer at FPT Software",
-        time: "02.06.2023 - now",
+        title: "Frontend Developer at FPT Software 👦",
+        time: "02.06.2023 - 15.08.2024",
+      },
+      {
+        title: "Web Developer at Nice Information Vietnam 👨‍💻",
+        time: "09.09.2024 - Now",
       },
     ],
     projects: [
       {
         title: "My portfolio",
         description:
-          "My portfolio project to apply things like: Next.js, Framer-motion and Shadcn/ui!",
+          "My portfolio project to express myself and learn things like: Next.js, motion and shadcn/ui!",
         image: "/projects/portfolio.png",
         repoLink: "https://github.com/pta201/portfolio",
       },
