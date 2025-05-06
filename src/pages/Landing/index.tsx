@@ -101,10 +101,12 @@ export default function Landing() {
                     <TypographyLarge>
                       <AnimatedText
                         text={`Hello there! Welcome to my personal page`}
-                        className="text-3xl"
+                        className="text-4xl"
                       />
                     </TypographyLarge>
-                    <TypographyLead>{siteConfig.user.describe}</TypographyLead>
+                    <TypographyLead className="text-lg animate-fade-right animate-duration-[1500ms]">
+                      {siteConfig.user.describe}
+                    </TypographyLead>
                   </div>
                   <div>
                     <Signature />
