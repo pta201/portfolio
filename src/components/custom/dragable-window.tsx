@@ -1,60 +1,76 @@
 "use client";
-import { RestrictToElement } from "@dnd-kit/dom/modifiers";
-import { useDraggable } from "@dnd-kit/react";
-import { ReactNode, useRef } from "react";
-import { useMountedState } from "react-use";
-import ClientOnly from "./client-only";
+import { cn } from "@/lib/utils";
+import { useDraggable } from "@dnd-kit/core";
+import { CSS } from "@dnd-kit/utilities";
+import { ReactNode } from "react";
 interface DraggableWindowProps {
   title: string;
   onClose?: () => void;
   content: ReactNode;
-  onDragStart: () => void;
-  onDragEnd: () => void;
+  id: string;
+  x: number;
+  y: number;
+  isActive: boolean;
+  onClick: () => void;
 }
 function DraggableWindow({
   title,
   onClose,
-  onDragStart,
-  onDragEnd,
+  id,
+  x,
+  y,
   content,
+  isActive = false,
+  onClick,
 }: Readonly<DraggableWindowProps>) {
-  const isMounted = useMountedState();
-  const headerRef = useRef<HTMLDivElement | null>(null);
-  const { ref, draggable } = useDraggable({
-    id: title,
-    handle: headerRef,
-    modifiers: [
-      RestrictToElement.configure({
-        element: (isMounted() && window?.document.body) || null,
-      }),
-    ],
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id,
   });
-  const itemStyle = draggable.alignment
-    ? {
-        transform: `translate3d(${draggable.alignment.x}px, ${draggable.alignment.y}px, 0)`,
-      }
-    : {};
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    top: y,
+    left: x,
+  };
+
   return (
-    <ClientOnly>
-      <div
-        ref={ref}
-        style={itemStyle}
-        className="window w-min-[300px] h-min-[300px] bg-accent shadow-lg rounded-lg  border border-primary/50 overflow-hidden"
-      >
+    <dialog
+      aria-labelledby="window-title"
+      ref={setNodeRef}
+      className={cn(
+        "window w-min-[300px] h-min-[300px] bg-accent shadow-lg rounded-lg  border border-primary/50 overflow-hidden absolute",
+        isActive ? "z-10" : "z-0"
+      )}
+      style={style}
+      onClick={onClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          onClick();
+        }
+      }}
+      open
+    >
+      <div className="relative">
         <div
-          ref={headerRef}
-          className="window-header px-4 py-2 flex items-center justify-between bg-accent text-accent-foreground rounded-t-lg border-b border-foreground/50"
+          className="window-header px-4 py-2 flex items-center justify-between bg-accent text-accent-foreground rounded-t-lg border-b border-foreground/50 relative "
+          {...listeners}
+          {...attributes}
         >
           <span className="window-title text-xl">{title}</span>
-          <button className="window-close-button" onClick={onClose}>
-            [X]
-          </button>
         </div>
+        <button
+          className="window-close-button absolute right-2 top-2 hover:scale-110 transition-all"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose?.();
+          }}
+        >
+          [ X ]
+        </button>
         <div className="bg-primary/20 p-4 overflow-auto max-h-[20rem]">
           {content}
         </div>
       </div>
-    </ClientOnly>
+    </dialog>
   );
 }
 

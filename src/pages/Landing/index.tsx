@@ -8,89 +8,147 @@ import { siteConfig } from "@/constants/config/site";
 import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
 import MainHeader from "@/pages/Landing/layout/MainHeader";
-import { DragDropProvider } from "@dnd-kit/react";
+import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
+import { BriefcaseBusiness, Info, Pickaxe } from "lucide-react";
+import { useState } from "react";
 import Project from "./components/Project";
+
+const items = [
+  {
+    id: "1",
+    title: "About",
+    content: (
+      <div className="flex items-center justify-center  md:justify-between md:gap-4 text-left flex-wrap-reverse">
+        <About />
+        <div className="rounded-full overflow-hidden">
+          <AppImage
+            src={siteConfig.user.github}
+            width={"200"}
+            height={"200"}
+            alt="user-avatar"
+          />
+        </div>
+      </div>
+    ),
+    icon: Info,
+  },
+  {
+    id: "2",
+    title: "Projects",
+    content: <Project />,
+    icon: BriefcaseBusiness,
+  },
+  {
+    id: "3",
+    title: "Experience",
+    content: <Experience />,
+    icon: Pickaxe,
+  },
+];
+const initWindows = items.map((item, index) => ({
+  ...item,
+  x: Math.floor(Math.random() * index * 100),
+  y: Math.floor(Math.random() * index * 200),
+}));
+
 export default function Landing() {
-  // const [activeDraggable, setActiveDraggable] = useState(null);
+  const [activeWindowIds, setActiveWindowIds] = useState<string[]>([]);
+  const [windows, setWindows] = useState(initWindows);
+  const closeWindow = (id: string) => {
+    setActiveWindowIds((prev) => prev.filter((window) => window !== id));
+  };
+  const openWindow = (id: string) => {
+    setActiveWindowIds((prev) => {
+      if (prev.includes(id)) return prev;
+      return [...prev, id];
+    });
+    setDraggingId(id);
+  };
+  const [draggingId, setDraggingId] = useState<UniqueIdentifier | null>(null);
   return (
     <>
       <div className="sticky top-0 opacity-95">
         <MainHeader />
       </div>
-      <DragDropProvider
+      <DndContext
         onDragStart={(ev) => {
-          console.log("drag start", ev);
+          setDraggingId(ev.active.id);
         }}
-        onDragEnd={(ev) => {
-          console.log("drag end", ev);
+        onDragEnd={({ delta }) => {
+          const { x, y } = delta;
+          setWindows((prev) => {
+            const newWindows = [...prev];
+            const index = newWindows.findIndex(
+              (window) => window.id === draggingId
+            );
+            if (index !== -1) {
+              newWindows[index] = {
+                ...newWindows[index],
+                x: newWindows[index].x + x,
+                y: newWindows[index].y + y,
+              };
+            }
+            return newWindows;
+          });
         }}
       >
         <DroppableZone id="droppable-zone">
-          <main className="min-h-screen text-foreground bg-primary/20  p-4">
-            <div className="flex flex-col gap-12 max-w-(--breakpoint-lg) mx-auto ">
-              <section className="flex gap-4 flex-wrap-reverse justify-between">
-                <div className="flex flex-col gap-4 flex-3/5">
-                  <TypographyLarge>
-                    <AnimatedText
-                      text={`Hello there! Welcome to my personal page`}
-                      className="text-3xl"
-                    />
-                  </TypographyLarge>
-                  <TypographyLead>{siteConfig.user.describe}</TypographyLead>
-                </div>
-                <div>
-                  <Signature />
+          <main className="grid min-h-screen text-foreground bg-primary/20  p-4">
+            <div className=" grid place-items-center h-full  max-w-(--breakpoint-lg) mx-auto ">
+              <section className="flex flex-col gap-8 justify-center items-center">
+                <header className="flex gap-4 flex-wrap-reverse justify-between">
+                  <div className="flex flex-col gap-4 flex-3/5">
+                    <TypographyLarge>
+                      <AnimatedText
+                        text={`Hello there! Welcome to my personal page`}
+                        className="text-3xl"
+                      />
+                    </TypographyLarge>
+                    <TypographyLead>{siteConfig.user.describe}</TypographyLead>
+                  </div>
+                  <div>
+                    <Signature />
+                  </div>
+                </header>
+
+                <div className="flex gap-8">
+                  {items.map((item) => {
+                    return (
+                      <button
+                        className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-34  h-34 flex items-center justify-center flex-col"
+                        key={`button-${item.id}`}
+                        onClick={() => openWindow(item.id)}
+                      >
+                        <item.icon className="w-12 h-12" />
+                        <TypographyLarge>{item.title}</TypographyLarge>
+                      </button>
+                    );
+                  })}
                 </div>
               </section>
 
-              <DraggableWindow
-                title="About"
-                content={
-                  <div className="flex items-center justify-center  md:justify-between md:gap-4 text-left flex-wrap-reverse">
-                    <About />
-                    <div className="rounded-full overflow-hidden">
-                      <AppImage
-                        src={siteConfig.user.github}
-                        width={"200"}
-                        height={"200"}
-                        alt="user-avatar"
-                      />
-                    </div>
-                  </div>
+              {windows.map((item) => {
+                if (!activeWindowIds.includes(item.id)) {
+                  return null;
                 }
-                onDragStart={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                onDragEnd={function (): void {
-                  throw new Error("Function not implemented.");
-                }} // onClose={() => {}}
-              />
-
-              <DraggableWindow
-                title="Projects"
-                content={<Project />}
-                onDragStart={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                onDragEnd={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
-
-              <DraggableWindow
-                title="Experience"
-                content={<Experience />}
-                onDragStart={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-                onDragEnd={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
+                return (
+                  <DraggableWindow
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    content={item.content}
+                    onClose={() => closeWindow(item.id)}
+                    x={item.x}
+                    y={item.y}
+                    isActive={draggingId === item.id}
+                    onClick={() => setDraggingId(item.id)}
+                  />
+                );
+              })}
             </div>
           </main>
         </DroppableZone>
-      </DragDropProvider>
+      </DndContext>
     </>
   );
 }
