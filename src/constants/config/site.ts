@@ -6,7 +6,7 @@ export const siteConfig = {
     facebook: "https://www.facebook.com/pta208",
     email: "pta20801@gmail.com",
     describe: [
-      "My name is Tien Anh 🐧.",
+      "My name is Tien Anh 🐍.",
       "I'm a web developer in 🇻🇳.",
       "I love to learn new things and improve myself every day.",
       "I love new challenges and opportunities to grow my skills.🐣",
@@ -27,7 +27,7 @@ export const siteConfig = {
     ],
     experiences: [
       {
-        title: "University of Transport and Communication 👶",
+        title: "University of Transport and Communication 🍼",
         time: "xx.8.2019 - xx.4.2024",
       },
       {

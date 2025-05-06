@@ -9,11 +9,14 @@ import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
 import MainHeader from "@/pages/Landing/layout/MainHeader";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
+import View3D from "@egjs/react-view3d";
+import "@egjs/react-view3d/css/view3d-bundle.min.css";
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
+import { BsQuestionCircle } from "react-icons/bs";
 import Contact from "./components/Contact";
+import FAQ from "./components/FAQ";
 import Project from "./components/Project";
-
 const items = [
   {
     id: "1",
@@ -50,6 +53,12 @@ const items = [
     title: "Contact",
     content: <Contact />,
     icon: Mail,
+  },
+  {
+    id: "5",
+    title: "FAQ",
+    content: <FAQ />,
+    icon: BsQuestionCircle,
   },
 ];
 const initWindows = items.map((item, index) => ({
@@ -111,6 +120,7 @@ export default function Landing() {
                         className="text-4xl"
                       />
                     </TypographyLarge>
+
                     {siteConfig.user.describe.map((item) => (
                       <TypographySmall
                         key={item}
@@ -120,8 +130,18 @@ export default function Landing() {
                       </TypographySmall>
                     ))}
                   </div>
-                  <div>
+                  <div className="flex justify-between">
                     <Signature />
+                    <View3D
+                      className="w-[240px] h-[240px]"
+                      src="/model_2.glb"
+                      autoplay={true}
+                      initialZoom={4}
+                      yaw={-45}
+                      onReady={(e) => {
+                        console.log(e);
+                      }}
+                    />
                   </div>
                 </header>
 
@@ -129,7 +149,7 @@ export default function Landing() {
                   {items.map((item) => {
                     return (
                       <button
-                        className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-34  h-34 flex items-center justify-center flex-col"
+                        className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-36  h-36 flex items-center justify-center flex-col"
                         key={`button-${item.id}`}
                         onClick={() => openWindow(item.id)}
                       >
@@ -160,6 +180,7 @@ export default function Landing() {
                 );
               })}
             </div>
+            <footer className="absolute bottom-0 left-0 right-0 "></footer>
           </main>
         </DroppableZone>
       </DndContext>
