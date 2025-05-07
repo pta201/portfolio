@@ -9,13 +9,13 @@ import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
 import MainHeader from "@/pages/Landing/layout/MainHeader";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
-import View3D from "@egjs/react-view3d";
-import "@egjs/react-view3d/css/view3d-bundle.min.css";
+
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
 import { BsQuestionCircle } from "react-icons/bs";
 import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
+import Model from "./components/Model";
 import Project from "./components/Project";
 const items = [
   {
@@ -132,16 +132,7 @@ export default function Landing() {
                   </div>
                   <div className="flex justify-between">
                     <Signature />
-                    <View3D
-                      className="w-[240px] h-[240px]"
-                      src="/model_2.glb"
-                      autoplay={true}
-                      initialZoom={4}
-                      yaw={-45}
-                      onReady={(e) => {
-                        console.log(e);
-                      }}
-                    />
+                    <Model />
                   </div>
                 </header>
 
