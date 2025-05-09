@@ -1,6 +1,14 @@
 export const NavItems = [
   {
     href: "/",
-    content: "Home",
+    content: "home",
+  },
+  {
+    href: "/blog",
+    content: "blog",
+  },
+  {
+    href: "/game",
+    content: "game",
   },
 ];

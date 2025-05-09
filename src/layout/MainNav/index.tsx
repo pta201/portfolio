@@ -21,7 +21,10 @@ interface NavItemProps {
 export function Item({ href, content, isActive }: NavItemProps) {
   if (href)
     return (
-      <Link href={href} className="text-foreground">
+      <Link
+        href={href}
+        className="text-primary-foreground capitalize hover:text-accent hover:brightness-120 px-4 py-2 rounded-md transition-colors duration-200 ease-in-out"
+      >
         {content}
       </Link>
     );

@@ -12,6 +12,7 @@ interface DraggableWindowProps {
   y: number;
   isActive: boolean;
   onClick: () => void;
+  className?: string;
 }
 function DraggableWindow({
   title,
@@ -22,6 +23,7 @@ function DraggableWindow({
   content,
   isActive = false,
   onClick,
+  className,
 }: Readonly<DraggableWindowProps>) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
@@ -38,7 +40,8 @@ function DraggableWindow({
       ref={setNodeRef}
       className={cn(
         "window w-min-[300px] h-min-[300px] bg-accent shadow-lg rounded-lg  border border-primary/50 overflow-hidden absolute",
-        isActive ? "z-10" : "z-0"
+        isActive ? "z-10" : "z-0",
+        className
       )}
       style={style}
       onClick={onClick}
