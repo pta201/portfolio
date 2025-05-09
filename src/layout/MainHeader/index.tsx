@@ -3,7 +3,7 @@
 import Icon from "@/components/Icon";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { siteConfig } from "@/constants/config/site";
-import Nav from "@/pages/Landing/layout/MainNav";
+import Nav from "@/layout/MainNav";
 
 export default function MainHeader() {
   return (

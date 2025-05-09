@@ -7,16 +7,16 @@ import { TypographyLarge, TypographySmall } from "@/components/ui/typography";
 import { siteConfig } from "@/constants/config/site";
 import About from "@/pages/Landing/components/About";
 import Experience from "@/pages/Landing/components/Experience";
-import MainHeader from "@/pages/Landing/layout/MainHeader";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 
-import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
+import Container from "@/layout/Container";
+import { BriefcaseBusiness, Contact, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
 import { BsQuestionCircle } from "react-icons/bs";
-import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
 import Model from "./components/Model";
 import Project from "./components/Project";
+
 const items = [
   {
     id: "1",
@@ -82,99 +82,94 @@ export default function Landing() {
   };
   const [draggingId, setDraggingId] = useState<UniqueIdentifier | null>(null);
   return (
-    <>
-      <div className="sticky top-0 opacity-95">
-        <MainHeader />
-      </div>
-      <DndContext
-        onDragStart={(ev) => {
-          setDraggingId(ev.active.id);
-        }}
-        onDragEnd={({ delta }) => {
-          const { x, y } = delta;
-          setWindows((prev) => {
-            const newWindows = [...prev];
-            const index = newWindows.findIndex(
-              (window) => window.id === draggingId
-            );
-            if (index !== -1) {
-              newWindows[index] = {
-                ...newWindows[index],
-                x: newWindows[index].x + x,
-                y: newWindows[index].y + y,
-              };
-            }
-            return newWindows;
-          });
-        }}
-      >
-        <DroppableZone id="droppable-zone">
-          <main className="grid min-h-screen text-foreground bg-primary/20  p-4">
-            <div className=" grid place-items-center h-full  max-w-(--breakpoint-lg) mx-auto ">
-              <section className="flex flex-col gap-8 justify-center items-center">
-                <header className="flex gap-4 flex-wrap-reverse justify-between">
-                  <div className="flex flex-col gap-4 flex-3/5">
-                    <TypographyLarge>
-                      <AnimatedText
-                        text={`Hello there! Welcome to my personal page`}
-                        className="text-4xl"
-                      />
-                    </TypographyLarge>
+    <DndContext
+      onDragStart={(ev) => {
+        setDraggingId(ev.active.id);
+      }}
+      onDragEnd={({ delta }) => {
+        const { x, y } = delta;
+        setWindows((prev) => {
+          const newWindows = [...prev];
+          const index = newWindows.findIndex(
+            (window) => window.id === draggingId
+          );
+          if (index !== -1) {
+            newWindows[index] = {
+              ...newWindows[index],
+              x: newWindows[index].x + x,
+              y: newWindows[index].y + y,
+            };
+          }
+          return newWindows;
+        });
+      }}
+    >
+      <DroppableZone id="droppable-zone">
+        <main className="grid min-h-screen text-foreground bg-primary/20  p-4">
+          <Container>
+            <section className="flex flex-col gap-8 justify-center items-center">
+              <header className="flex gap-4 flex-wrap-reverse justify-between">
+                <div className="flex flex-col gap-4 flex-3/5">
+                  <TypographyLarge>
+                    <AnimatedText
+                      text={`Hello there! Welcome to my personal page`}
+                      className="text-4xl"
+                    />
+                  </TypographyLarge>
 
-                    {siteConfig.user.describe.map((item) => (
-                      <TypographySmall
-                        key={item}
-                        className="text-lg animate-fade-right animate-duration-[1000ms]"
-                      >
-                        {item}
-                      </TypographySmall>
-                    ))}
-                  </div>
-                  <div className="flex justify-between">
-                    <Signature />
-                    <Model />
-                  </div>
-                </header>
-
-                <div className="flex gap-8">
-                  {items.map((item) => {
-                    return (
-                      <button
-                        className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-36  h-36 flex items-center justify-center flex-col"
-                        key={`button-${item.id}`}
-                        onClick={() => openWindow(item.id)}
-                      >
-                        <item.icon className="w-12 h-12" />
-                        <TypographyLarge>{item.title}</TypographyLarge>
-                      </button>
-                    );
-                  })}
+                  {siteConfig.user.describe.map((item) => (
+                    <TypographySmall
+                      key={item}
+                      className="text-lg animate-fade-right animate-duration-[1000ms]"
+                    >
+                      {item}
+                    </TypographySmall>
+                  ))}
                 </div>
-              </section>
+                <div className="flex justify-between">
+                  <Signature />
+                  <Model />
+                </div>
+              </header>
 
-              {windows.map((item) => {
-                if (!activeWindowIds.includes(item.id)) {
-                  return null;
-                }
-                return (
-                  <DraggableWindow
-                    key={item.id}
-                    id={item.id}
-                    title={item.title}
-                    content={item.content}
-                    onClose={() => closeWindow(item.id)}
-                    x={item.x}
-                    y={item.y}
-                    isActive={draggingId === item.id}
-                    onClick={() => setDraggingId(item.id)}
-                  />
-                );
-              })}
-            </div>
-            <footer className="absolute bottom-0 left-0 right-0 "></footer>
-          </main>
-        </DroppableZone>
-      </DndContext>
-    </>
+              <div className="flex gap-8">
+                {items.map((item) => {
+                  return (
+                    <button
+                      className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-36  h-36 flex items-center justify-center flex-col"
+                      key={`button-${item.id}`}
+                      onClick={() => openWindow(item.id)}
+                    >
+                      <item.icon className="w-12 h-12" />
+                      <TypographyLarge>{item.title}</TypographyLarge>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+
+            {windows.map((item) => {
+              if (!activeWindowIds.includes(item.id)) {
+                return null;
+              }
+              return (
+                <DraggableWindow
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  content={item.content}
+                  onClose={() => closeWindow(item.id)}
+                  x={item.x}
+                  y={item.y}
+                  isActive={draggingId === item.id}
+                  onClick={() => setDraggingId(item.id)}
+                />
+              );
+            })}
+          </Container>
+          <footer className="absolute bottom-0 left-0 right-0 "></footer>
+        </main>
+      </DroppableZone>
+    </DndContext>
   );
 }
