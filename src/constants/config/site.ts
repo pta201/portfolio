@@ -55,6 +55,13 @@ export const siteConfig = {
         image: "/projects/portfolio.png",
         repoLink: "https://github.com/pta201/portfolio",
       },
+      {
+        title: "Insida App",
+        description:
+          "A real estate social media application to help connecting with your realtor to find your dream home! 🏡",
+        image: "/projects/insida.png",
+        // repoLink: "https://github.com/pta201/portfolio",
+      },
     ],
   },
 };

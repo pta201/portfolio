@@ -10,9 +10,10 @@ import Experience from "@/pages/Landing/components/Experience";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 
 import Container from "@/layout/Container";
-import { BriefcaseBusiness, Contact, Info, Mail, Pickaxe } from "lucide-react";
+import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
 import { BsQuestionCircle } from "react-icons/bs";
+import Contact from "./components/Contact";
 import FAQ from "./components/FAQ";
 import Model from "./components/Model";
 import Project from "./components/Project";
@@ -41,6 +42,7 @@ const items = [
     title: "Projects",
     content: <Project />,
     icon: BriefcaseBusiness,
+    className: "w-[50rem]",
   },
   {
     id: "3",
@@ -110,7 +112,10 @@ export default function Landing() {
             <section className="flex flex-col gap-8 justify-center items-center">
               <header className="flex gap-4 flex-wrap-reverse justify-between">
                 <div className="flex flex-col gap-4 flex-3/5">
-                  <TypographyLarge>
+                  <TypographyLarge className="flex gap-2 items-center">
+                    <div className="animate-wiggle animate-infinite animate-ease-in-out text-4xl">
+                      👋
+                    </div>
                     <AnimatedText
                       text={`Hello there! Welcome to my personal page`}
                       className="text-4xl"
@@ -163,6 +168,7 @@ export default function Landing() {
                   y={item.y}
                   isActive={draggingId === item.id}
                   onClick={() => setDraggingId(item.id)}
+                  className={item.className}
                 />
               );
             })}

@@ -23,16 +23,18 @@ export default function Project() {
               {item.description}
             </TypographySmall>
 
-            <TypographyMuted>
-              Repository link:{" "}
-              <Link
-                href={item.repoLink}
-                target="_blank"
-                className="text-accent-foreground"
-              >
-                {item.repoLink}
-              </Link>
-            </TypographyMuted>
+            {item.repoLink && (
+              <TypographyMuted>
+                Repository link:{" "}
+                <Link
+                  href={item.repoLink}
+                  target="_blank"
+                  className="text-accent-foreground"
+                >
+                  {item.repoLink}
+                </Link>
+              </TypographyMuted>
+            )}
           </div>
           <div
             className={`order-2 mx-auto ${

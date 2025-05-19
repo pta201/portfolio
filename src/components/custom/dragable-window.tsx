@@ -39,7 +39,7 @@ function DraggableWindow({
       aria-labelledby="window-title"
       ref={setNodeRef}
       className={cn(
-        "window w-min-[300px] h-min-[300px] bg-accent shadow-lg rounded-lg  border border-primary/50 overflow-hidden absolute",
+        "window  bg-accent shadow-lg rounded-lg  border border-primary/50 overflow-hidden absolute",
         isActive ? "z-10" : "z-0",
         className
       )}
