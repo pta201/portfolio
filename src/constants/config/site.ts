@@ -1,7 +1,8 @@
 export const siteConfig = {
   user: {
     name: "Tien Anh",
-    avatar: "https://github.com/pta201.png?w=500&h=500",
+    avatar:
+      "https://gravatar.com/avatar/5a2764db43023caff1be3d7d2201cffbb4ab5d555a4bd76bb6819ff2690484cc?s=400",
     github: "https://github.com/pta201",
     facebook: "https://www.facebook.com/pta208",
     email: "pta20801@gmail.com",

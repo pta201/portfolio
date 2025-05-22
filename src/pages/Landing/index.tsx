@@ -12,9 +12,7 @@ import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 import Container from "@/layout/Container";
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
-import { BsQuestionCircle } from "react-icons/bs";
 import Contact from "./components/Contact";
-import FAQ from "./components/FAQ";
 import Model from "./components/Model";
 import Project from "./components/Project";
 
@@ -25,7 +23,7 @@ const items = [
     content: (
       <div className="flex items-center justify-center  md:justify-between md:gap-4 text-left flex-wrap-reverse">
         <About />
-        <div className="rounded-full overflow-hidden">
+        <div className="rounded-full overflow-hidden hover:brightness-110">
           <AppImage
             src={siteConfig.user.avatar}
             width={"200"}
@@ -56,12 +54,12 @@ const items = [
     content: <Contact />,
     icon: Mail,
   },
-  {
-    id: "5",
-    title: "FAQ",
-    content: <FAQ />,
-    icon: BsQuestionCircle,
-  },
+  // {
+  //   id: "5",
+  //   title: "FAQ",
+  //   content: <FAQ />,
+  //   icon: BsQuestionCircle,
+  // },
 ];
 const initWindows = items.map((item, index) => ({
   ...item,
