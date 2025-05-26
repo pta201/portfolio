@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   TypographyLarge,
   TypographyMuted,
@@ -6,6 +7,7 @@ import {
 import { RefreshCcw } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNumberGuessingStore } from "../provider/number-guessing-provider";
 
 interface Props {}
 
@@ -27,6 +29,9 @@ const NumberGuessing = (props: Props) => {
   const [message, setMessage] = useState<string>("");
   const [gameOver, setGameOver] = useState(false);
   const [isCorrected, setIsCorrected] = useState(false);
+
+  const { increaseLoss, increaseWin, lossCount, winCount } =
+    useNumberGuessingStore();
   const handleGuess = (data: any) => {
     if (gameOver) {
       setMessage("Game Over! Please start a new game.");
@@ -34,10 +39,12 @@ const NumberGuessing = (props: Props) => {
     }
     const userGuess = parseInt(data.guess);
     if (userGuess === numberToGuess) {
-      setMessage("Congratulations! You guessed the number!");
       setGameOver(true);
-
       setIsCorrected(true);
+
+      setMessage("Congratulations! You guessed the number!");
+
+      handleGameOver(true);
     } else {
       setAttempts((prev) => prev - 1);
       setIsCorrected(false);
@@ -45,6 +52,8 @@ const NumberGuessing = (props: Props) => {
       if (attempts <= 1) {
         setGameOver(true);
         setMessage(`Game Over! The number was ${numberToGuess}`);
+
+        handleGameOver(false);
       } else {
         setMessage(
           userGuess < numberToGuess
@@ -54,6 +63,11 @@ const NumberGuessing = (props: Props) => {
       }
     }
   };
+  const handleGameOver = (isWin: boolean) => {
+    if (!isWin) return increaseLoss();
+    return increaseWin();
+  };
+
   const handleReset = () => {
     setMessage("Let's make our guess");
     setGameOver(false);
@@ -70,15 +84,16 @@ const NumberGuessing = (props: Props) => {
   return (
     <div className="relative">
       <div className="flex flex-col mb-12">
-        <TypographyLarge className="text-4xl font-bold">
-          Number Guessing
+        <TypographyLarge className="text-2xl font-bold">
+          Number Guessing{" "}
+          <TypographyMuted>(Aquired {winCount} 🏆 )</TypographyMuted>
         </TypographyLarge>
         <TypographySmall className="text-lg">
           Guess the number between 1 and 100
         </TypographySmall>
       </div>
       <div className="flex justify-between my-4">
-        <TypographyLarge className="">{message}</TypographyLarge>
+        <TypographyLarge>{message}</TypographyLarge>
         <TypographyMuted className="text-lg">
           Remaining attempt: {attempts}
         </TypographyMuted>
@@ -97,19 +112,18 @@ const NumberGuessing = (props: Props) => {
           {...register("guess")}
         />
         <div className="flex w-full gap-4">
-          <button
-            className="bg-primary text-primary-foreground p-2 rounded basis-[80%]"
-            type="submit"
-          >
+          <Button className="basis-[80%] p-4" type="submit" size={"lg"}>
             Submit
-          </button>
-          <button
-            className="flex-1 bg-primary text-primary-foreground p-2 rounded flex items-center justify-center"
+          </Button>
+          <Button
+            size={"lg"}
+            className="flex-1 p-4"
             type="reset"
             onClick={() => handleReset()}
+            variant={"secondary"}
           >
             <RefreshCcw />
-          </button>
+          </Button>
         </div>
       </form>
       <div className="absolute top-0 right-0 w-[100px] h-[100px] rounded-md overflow-hidden">
