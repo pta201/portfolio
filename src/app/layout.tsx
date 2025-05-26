@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@/components/theme-provider";
 import AppLayout from "@/layout";
+import AppProvider from "@/providers";
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,14 +19,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <Analytics />
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <AppProvider>
           <AppLayout>{children}</AppLayout>
-        </ThemeProvider>
+        </AppProvider>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 "use client";
-import Game from "@/pages/Game";
+import Game from "@/features/Game";
 export default function Index() {
   return <Game />;
 }

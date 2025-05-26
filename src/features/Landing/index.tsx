@@ -5,10 +5,11 @@ import AnimatedText from "@/components/ui/AnimatedText";
 import Signature from "@/components/ui/Signature";
 import { TypographyLarge, TypographySmall } from "@/components/ui/typography";
 import { siteConfig } from "@/constants/config/site";
-import About from "@/pages/Landing/components/About";
-import Experience from "@/pages/Landing/components/Experience";
+import About from "@/features/Landing/components/About";
+import Experience from "@/features/Landing/components/Experience";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 
+import SpotifyNowPlaying from "@/components/SpotifyNowPlaying";
 import Container from "@/layout/Container";
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
@@ -139,7 +140,7 @@ export default function Landing() {
                 {items.map((item) => {
                   return (
                     <button
-                      className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-36  h-36 flex items-center justify-center flex-col"
+                      className="text-accent-foreground rounded-lg px-4 py-2 hover:scale-105 transition-all w-36  h-36 flex items-center justify-center flex-col cursor-pointer"
                       key={`button-${item.id}`}
                       onClick={() => openWindow(item.id)}
                     >
@@ -171,7 +172,9 @@ export default function Landing() {
               );
             })}
           </Container>
-          <footer className="absolute bottom-0 left-0 right-0 "></footer>
+          <footer className="absolute bottom-0 left-0 right-0 ">
+            <SpotifyNowPlaying />
+          </footer>
         </main>
       </DroppableZone>
     </DndContext>

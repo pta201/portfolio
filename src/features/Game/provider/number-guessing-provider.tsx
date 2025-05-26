@@ -42,3 +42,5 @@ export const useNumberGuessingStore = () => {
 
   return useStore(numberGuessingStoreContext);
 };
+
+export default NumberGuessingStoreProvider;
