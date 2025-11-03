@@ -22,11 +22,11 @@ const Model = (props: Props) => {
       <View3D
         ref={ref}
         className="w-[300px] h-[300px]"
-        src="/model_2.glb"
-        autoplay={true}
+        src="/beemo.glb"
         webAR={true}
-        initialZoom={4}
-        yaw={-45}
+        initialZoom={0}
+        yaw={0}
+        pitch={5}
         onReady={(e) => {
           console.log(e);
         }}

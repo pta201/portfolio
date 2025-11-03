@@ -106,7 +106,7 @@ export default function Landing() {
       }}
     >
       <DroppableZone id="droppable-zone">
-        <main className="grid h-full text-foreground bg-primary/20  p-4">
+        <main className="grid h-full text-foreground bg-primary/20 p-4">
           <Container>
             <section className="flex flex-col gap-8 justify-center items-center">
               <header className="flex gap-4 flex-wrap-reverse justify-between">
