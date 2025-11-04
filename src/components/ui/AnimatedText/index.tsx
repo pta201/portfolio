@@ -1,7 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cn } from "../../../lib/utils";
-
 const AnimatedText = ({
   text,
   className,
@@ -51,11 +50,7 @@ const AnimatedText = ({
       animate="visible"
     >
       {words.map((word: string, index: number) => (
-        <motion.span
-          variants={child}
-          style={{ marginRight: "5px" }}
-          key={index}
-        >
+        <motion.span animate={child} style={{ marginRight: "5px" }} key={index}>
           {word}
         </motion.span>
       ))}
