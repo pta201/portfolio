@@ -48,12 +48,14 @@ const SpotifyNowPlayingContent = ({
     }`;
   };
 
-  const isDisabled = isError || isLoading || !data?.isPlaying;
   const handleSpotifyClick = () => {
     if (data?.songUrl) {
       window.open(data.songUrl, "_blank");
     }
   };
+
+  const isDisabled = isError || isLoading || !data?.isPlaying;
+
   return (
     <Button
       key={data?.songUrl}

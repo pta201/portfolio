@@ -143,7 +143,7 @@ function Cat({ isSuccess }: { isSuccess: boolean }) {
 
   return (
     <iframe
-      title="cat-fail-gif"
+      title="cat-gif"
       src={url}
       width="100%"
       height="100%"

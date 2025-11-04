@@ -13,6 +13,7 @@ interface DraggableWindowProps {
   isActive: boolean;
   onClick: () => void;
   className?: string;
+  contentCn?: string;
 }
 function DraggableWindow({
   title,
@@ -24,6 +25,7 @@ function DraggableWindow({
   isActive = false,
   onClick,
   className,
+  contentCn,
 }: Readonly<DraggableWindowProps>) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
@@ -69,7 +71,12 @@ function DraggableWindow({
         >
           [ X ]
         </button>
-        <div className="bg-primary/20 p-4 overflow-auto max-h-[20rem]">
+        <div
+          className={cn(
+            "bg-primary/20 p-4 overflow-auto max-h-[20rem]",
+            contentCn
+          )}
+        >
           {content}
         </div>
       </div>

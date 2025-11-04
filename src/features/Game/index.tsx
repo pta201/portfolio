@@ -10,7 +10,7 @@ import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 import { Scroll, Search, X } from "lucide-react";
 import { useState } from "react";
 import NumberGuessing from "./components/NumberGuessing";
-import RockPaperSiccors from "./components/RockPaperSiccors";
+import RockPaperScissors from "./components/RockPaperScissors";
 import TicTacToe from "./components/TicTacToe";
 
 const items = [
@@ -26,7 +26,8 @@ const items = [
     title: "Rock Paper Scissors",
     description: "Play Rock Paper Scissors",
     icon: Scroll,
-    content: <RockPaperSiccors />,
+    content: <RockPaperScissors />,
+    contentCn: "min-h-[400px]",
   },
   {
     id: "3",
@@ -83,7 +84,7 @@ export default function Game() {
         <DroppableZone id="droppable-zone">
           <Container className="flex justify-center items-center flex-col gap-8">
             <TypographyH1 className="text-lg mx-auto">
-              Welcome to the game page!
+              It's 🎮 TIME!
             </TypographyH1>
             <TypographyLarge>Choose a game to play:</TypographyLarge>
             <ul className="grid grid-cols-2 *:md:grid-cols-3 gap-8">
@@ -117,6 +118,7 @@ export default function Game() {
                   isActive={draggingId === item.id}
                   onClick={() => setDraggingId(item.id)}
                   className={"w-[600px]"}
+                  contentCn={item.contentCn}
                 />
               );
             })}
