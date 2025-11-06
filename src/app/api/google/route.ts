@@ -3,7 +3,7 @@ import { google } from "@ai-sdk/google";
 import { cosineSimilarity, embed, generateText } from "ai";
 import fs from "fs";
 
-const model = google("gemini-2.5-flash");
+const model = google("gemini-2.5-flash-lite");
 const embedModel = google.textEmbeddingModel("gemini-embedding-001");
 
 export async function GET(request: Request) {
