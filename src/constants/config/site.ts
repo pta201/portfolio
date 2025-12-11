@@ -9,8 +9,8 @@ export const siteConfig = {
     describe: [
       "My name is Tien Anh 🐍.",
       "I'm a web developer in 🇻🇳.",
-      "I love to learn new things and improve myself every day.🤓",
-      "I love new challenges and opportunities to grow my skills.🐣",
+      // "I love to learn new things and improve myself every day.🤓",
+      // "I love new challenges and opportunities to grow my skills.🐣",
     ],
     about: [
       {

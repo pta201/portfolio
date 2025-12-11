@@ -32,10 +32,13 @@ export async function GET(request: Request) {
       .split("\n")
       .join("\n");
 
+    const getPrompt = () =>
+      `You are an assistant for question-answering. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use five sentences maximum and keep the answer concise.Question: ${q} \nContext: ${context} \nAnswer:`;
+
     const { text } = await generateText({
       model,
       system: persona,
-      prompt: `Answer based on the following context:\n\n${context}\n\nQuestion: ${q}`,
+      prompt: getPrompt(),
     });
 
     return new Response(

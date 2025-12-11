@@ -115,16 +115,13 @@ export default function Landing() {
                     <div className="animate-wiggle animate-infinite animate-ease-in-out text-4xl">
                       👋
                     </div>
-                    <AnimatedText
-                      text={`Hello there! Welcome to my personal page`}
-                      className="text-4xl"
-                    />
+                    <AnimatedText text={`Hello there!`} className="text-4xl" />
                   </TypographyLarge>
 
                   {siteConfig.user.describe.map((item) => (
                     <TypographySmall
                       key={item}
-                      className="text-lg animate-fade-right animate-duration-[1000ms]"
+                      className="text-lg animate-fade-right animate-duration-1000 text-primary"
                     >
                       {item}
                     </TypographySmall>
