@@ -20,19 +20,13 @@ interface SpotifyData {
 }
 
 export async function GET() {
-  const response = await getNowPlaying();
-  if (!response.ok) {
+  const nowplayingData = await getNowPlaying<SpotifyData>();
+  console.log("Spotify API Response:", nowplayingData);
+  if (!nowplayingData?.is_playing) {
     return new Response(JSON.stringify({ isPlaying: false }), {
       status: 200,
     });
   }
-
-  if (response.status === 204 || response.status > 400) {
-    return new Response(JSON.stringify({ isPlaying: false }), {
-      status: 200,
-    });
-  }
-  const nowplayingData = (await response.json()) as SpotifyData;
 
   const data = {
     isPlaying: nowplayingData.is_playing,
@@ -49,7 +43,6 @@ export async function GET() {
       status: 200,
     });
   }
-
   return new Response(JSON.stringify(data), {
     status: 200,
   });

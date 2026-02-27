@@ -92,7 +92,7 @@ export default function Landing() {
         setWindows((prev) => {
           const newWindows = [...prev];
           const index = newWindows.findIndex(
-            (window) => window.id === draggingId
+            (window) => window.id === draggingId,
           );
           if (index !== -1) {
             newWindows[index] = {
@@ -110,7 +110,7 @@ export default function Landing() {
           <Container>
             <section className="flex flex-col gap-8 justify-center items-center">
               <header className="flex gap-4 flex-wrap-reverse justify-between">
-                <div className="flex flex-col gap-4 flex-3/5">
+                <div className="flex flex-col gap-4 flex-3/5 items-center md:items-start">
                   <TypographyLarge className="flex gap-2 items-center">
                     <div className="animate-wiggle animate-infinite animate-ease-in-out text-4xl">
                       👋
@@ -127,13 +127,13 @@ export default function Landing() {
                     </TypographySmall>
                   ))}
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between w-full mx-auto lg:mx-0 flex-col gap-8 md:flex-row">
                   <Signature />
                   <Model />
                 </div>
               </header>
 
-              <div className="flex gap-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {items.map((item) => {
                   return (
                     <button

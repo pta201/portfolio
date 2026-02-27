@@ -10,7 +10,9 @@ const Container = ({
   className,
 }: PropsWithChildren<ContainerProps>) => {
   return (
-    <div className={cn("max-w-(--breakpoint-lg) mx-auto ", className)}>
+    <div
+      className={cn("max-w-screen-sm lg:max-w-screen-lg mx-auto", className)}
+    >
       {children}
     </div>
   );

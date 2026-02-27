@@ -1,34 +1,49 @@
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const {
-  SPOTIFY_CLIENT_ID: client_id,
-  SPOTIFY_CLIENT_SECRET: client_secret,
-  SPOTIFY_REFRESH_TOKEN: refresh_token,
-} = process.env;
+const NOW_PLAYING_ENDPOINT =
+  "https://api.spotify.com/v1/me/player/currently-playing";
+const TOKEN_ENDPOINT = "https://accounts.spotify.com/api/token";
 
-export const getAccessToken = async () => {
-  const queryString = new URLSearchParams({
-    grant_type: "refresh_token",
-    refresh_token: refresh_token ?? "",
-  });
-  const token = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
-  const res = await fetch(TOKEN_ENDPOINT + "?" + queryString.toString(), {
+const client_id = process.env.SPOTIFY_CLIENT_ID!;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET!;
+const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN!;
+
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+
+export async function getAccessToken() {
+  const res = await fetch(TOKEN_ENDPOINT, {
     method: "POST",
     headers: {
+      Authorization: `Basic ${basic}`,
       "Content-Type": "application/x-www-form-urlencoded",
-      Authorization: `Basic ${token}`,
     },
+    body: new URLSearchParams({
+      grant_type: "refresh_token",
+      refresh_token,
+    }),
+    cache: "no-store",
   });
+
   const data = await res.json();
 
-  return data.access_token;
-};
-export const getNowPlaying = async () => {
+  if (!res.ok) {
+    throw new Error(JSON.stringify(data));
+  }
+
+  return data.access_token as string;
+}
+
+export async function getNowPlaying<T>() {
   const access_token = await getAccessToken();
 
-  return fetch(NOW_PLAYING_ENDPOINT, {
+  const res = await fetch(NOW_PLAYING_ENDPOINT, {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    cache: "no-store",
   });
-};
+
+  if (res.status === 204 || res.status > 400) {
+    return null;
+  }
+  const data = await res.json();
+  return data as T;
+}
