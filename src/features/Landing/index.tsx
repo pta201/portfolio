@@ -9,7 +9,6 @@ import About from "@/features/Landing/components/About";
 import Experience from "@/features/Landing/components/Experience";
 import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 
-import SpotifyNowPlaying from "@/components/SpotifyNowPlaying";
 import Container from "@/layout/Container";
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
 import { useState } from "react";
@@ -169,9 +168,6 @@ export default function Landing() {
               );
             })}
           </Container>
-          <footer className="absolute bottom-0 left-0 right-0 ">
-            <SpotifyNowPlaying />
-          </footer>
         </main>
       </DroppableZone>
     </DndContext>

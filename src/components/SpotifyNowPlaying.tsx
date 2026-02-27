@@ -1,3 +1,4 @@
+"use client";
 import { useQuery } from "@tanstack/react-query";
 import { FaSpotify } from "react-icons/fa";
 import { Button } from "./ui/button";
@@ -60,7 +61,7 @@ const SpotifyNowPlayingContent = ({
     <Button
       key={data?.songUrl}
       disabled={isDisabled}
-      className="w-full flex items-center rounded-none"
+      className="w-full flex items-center rounded-none h-full"
       onClick={handleSpotifyClick}
     >
       <FaSpotify fontSize={24} />

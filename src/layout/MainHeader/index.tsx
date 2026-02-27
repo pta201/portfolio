@@ -7,7 +7,7 @@ import Nav from "@/layout/MainNav";
 
 export default function MainHeader() {
   return (
-    <div className="flex items-center justify-between border-b border-b-accent bg-primary/80 text-accent px-4">
+    <div className="flex items-center justify-between border-b border-b-accent bg-primary/80 text-accent px-4 h-full">
       <div>
         <Nav.Item
           content={
