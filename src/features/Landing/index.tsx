@@ -11,7 +11,7 @@ import { DndContext, UniqueIdentifier } from "@dnd-kit/core";
 
 import Container from "@/layout/Container";
 import { BriefcaseBusiness, Info, Mail, Pickaxe } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Contact from "./components/Contact";
 import Model from "./components/Model";
 import Project from "./components/Project";
@@ -61,15 +61,52 @@ const items = [
   //   icon: BsQuestionCircle,
   // },
 ];
-const initWindows = items.map((item, index) => ({
-  ...item,
-  x: Math.floor((0.5 + Math.random() * 0.5) * (index + 1) * 250),
-  y: Math.floor((0.5 + Math.random() * 0.5) * 250),
-}));
+
+const generateWindows = (items: any[]) => {
+  return items.map((item) => {
+    const { x, y } = generateWindowPosition();
+    return { ...item, x, y };
+  });
+};
+
+const getMainContentSize = () => {
+  if (typeof window === "undefined") {
+    return { width: 0, height: 0 };
+  }
+
+  const mainContent = document.getElementById("main-content");
+  if (!mainContent) return { width: 0, height: 0 };
+
+  const { width, height } = mainContent.getBoundingClientRect();
+  return { width, height };
+};
+const generateWindowPosition = () => {
+  const windowSize = getMainContentSize();
+  const x = Math.random() * windowSize.width;
+  const y = Math.random() * windowSize.height;
+  return { x, y };
+};
 
 export default function Landing() {
   const [activeWindowIds, setActiveWindowIds] = useState<string[]>([]);
-  const [windows, setWindows] = useState(initWindows);
+  const [windows, setWindows] = useState<any[]>([]);
+
+  useEffect(() => {
+    const generated = generateWindows(items);
+    setWindows(generated);
+  }, [items]);
+
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setWindows((prev) => generateWindows(prev));
+      setActiveWindowIds([]);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const closeWindow = (id: string) => {
     setActiveWindowIds((prev) => prev.filter((window) => window !== id));
   };

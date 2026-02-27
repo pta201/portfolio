@@ -21,7 +21,6 @@ interface SpotifyData {
 
 export async function GET() {
   const nowplayingData = await getNowPlaying<SpotifyData>();
-  console.log("Spotify API Response:", nowplayingData);
   if (!nowplayingData?.is_playing) {
     return new Response(JSON.stringify({ isPlaying: false }), {
       status: 200,
